@@ -23,16 +23,24 @@ const Observer = function() {
 }
 
 const _addListener = function(type, fn) {
-  this[type] = fn
+  this.listeners.push({
+    key: type,
+    func: fn
+  })
 }
 
 const _removeListener = function(type) {
-  this[type] = null
+  this.listeners = this.listeners.filter(v => v.key !== type)
+}
+
+const _getListener = function() {
+  return this.listeners
 }
 
 const _dispatch = function(type, ...args) {
-  if (this[type]) {
-    this[type](...args)
+  const find = this.listeners.find(v => v.key === type)
+  if (find) {
+    find(...args)
   }
 }
 
@@ -48,12 +56,18 @@ Observer.prototype.createSubscriber = function() {
   this.$emit('create')
   this.id += 1
   const id = this.id
-  this.subscribers.push({
-    id,
+  const obj = {
     addListener: _addListener,
     removeListener: _removeListener,
-    dispatch: _dispatch
+    getListener: _getListener,
+    dispatch: _dispatch,
+    listeners: []
+  }
+  Object.defineProperty(obj, 'id', {
+    value: id,
+    writable: false
   })
+  this.subscribers.push(obj)
   return this.subscribers[this.subscribers.length - 1]
 }
 
@@ -66,8 +80,9 @@ Observer.prototype.createSubscriber = function() {
  */
 Observer.prototype.$emit = function(type, ...args) {
   this.subscribers.forEach(v => {
-    if (v[type]) {
-      v[type](...args)
+    const find = v.listeners.find(v => v.key === type)
+    if (find) {
+      find.func(...args)
     }
   })
 }
