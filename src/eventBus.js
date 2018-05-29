@@ -97,7 +97,7 @@ Observer.prototype.dispatch = function(type, ...args) {
  * @param {Number} id 订阅者的 id
  */
 Observer.prototype.removeSubscriber = function(id) {
-  this.subscribers.some((v, i) => {
+  return this.subscribers.some((v, i) => {
     if (v.id === id) {
       this.subscribers[i] = null
       this.subscribers.splice(i, 1)
