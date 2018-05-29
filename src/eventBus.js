@@ -37,13 +37,6 @@ const _getListener = function() {
   return this.listeners
 }
 
-const _dispatch = function(type, ...args) {
-  const find = this.listeners.find(v => v.key === type)
-  if (find) {
-    find(...args)
-  }
-}
-
 /**
  * 创建订阅者
  * 
@@ -60,7 +53,6 @@ Observer.prototype.createSubscriber = function() {
     addListener: _addListener,
     removeListener: _removeListener,
     getListener: _getListener,
-    dispatch: _dispatch,
     listeners: []
   }
   Object.defineProperty(obj, 'id', {
@@ -135,7 +127,7 @@ Observer.prototype.removeAllSubscriber = function() {
  */
 Observer.prototype.getSubscriber = function(id) {
   if (id) {
-    return this.subscribers.filter(v => v.id === id)
+    return this.subscribers.filter(v => v.id === id)[0]
   }
   return this.subscribers
 }

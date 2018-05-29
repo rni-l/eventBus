@@ -24,6 +24,16 @@ describe('Event bus', () => {
       OBJ.removeAllSubscriber()
       expect(OBJ.count).to.be.equal(0)
     })
+    it('get sub by id', () => {
+      const sub = OBJ.getSubscriber(SUB.id)
+      expect(SUB.id).to.equal(sub.id)
+      const sub2 = OBJ.getSubscriber('sdf')
+      expect(sub2).to.not.exist
+    })
+    it('get all subs', () => {
+      const sub2 = OBJ.createSubscriber()
+      expect(OBJ.getSubscriber().length).to.equal(2)
+    })
   })
 
   describe('subscribers', () => {
@@ -48,6 +58,8 @@ describe('Event bus', () => {
     })
 
     it('the observer can be deleted to subscriber by id', () => {
+      expect(OBJ.count).to.equal(1)
+      OBJ.removeSubscriber('sdf')
       expect(OBJ.count).to.equal(1)
       OBJ.removeSubscriber(SUB.id)
       expect(OBJ.count).to.equal(0)
