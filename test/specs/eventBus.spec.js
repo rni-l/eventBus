@@ -9,28 +9,28 @@ describe('Event bus', () => {
       OBJ = new eventBus()
       SUB = OBJ.createSubscriber()
     })
-    it('Can you new an object and have the count, subscribers property', () => {
+    it('have the count', () => {
       expect(OBJ.subscribers).to.be.an('array')
       expect(OBJ.count).to.least(0)
     })
-    it('the observer can be deleted subscriber by id', () => {
+    it('remove subscriber by id', () => {
       expect(OBJ.count).to.equal(1)
       OBJ.removeSubscriber(SUB.id)
       expect(OBJ.count).to.equal(0)
     })
-    it('the observer can be deleted all subscriber', () => {
+    it('remove all subscrber', () => {
       const sub2 = OBJ.createSubscriber()
       expect(OBJ.count).to.be.above(0)
       OBJ.removeAllSubscriber()
       expect(OBJ.count).to.be.equal(0)
     })
-    it('get sub by id', () => {
+    it('get subscrber by id', () => {
       const sub = OBJ.getSubscriber(SUB.id)
       expect(SUB.id).to.equal(sub.id)
       const sub2 = OBJ.getSubscriber('sdf')
       expect(sub2).to.not.exist
     })
-    it('get all subs', () => {
+    it('get all subscrbers', () => {
       const sub2 = OBJ.createSubscriber()
       expect(OBJ.getSubscriber().length).to.equal(2)
     })
@@ -43,7 +43,7 @@ describe('Event bus', () => {
       OBJ = new eventBus()
       SUB = OBJ.createSubscriber()
     })
-    it('get the sub objects and have differents id', () => {
+    it('the subscrbers have diffevent ids', () => {
       const sub2 = OBJ.createSubscriber()
       expect(SUB.id).to.not.equal(sub2.id)
     })
@@ -57,7 +57,7 @@ describe('Event bus', () => {
       expect(SUB.id).to.exist
     })
 
-    it('the observer can be deleted to subscriber by id', () => {
+    it('remove subscriber by id', () => {
       expect(OBJ.count).to.equal(1)
       OBJ.removeSubscriber('sdf')
       expect(OBJ.count).to.equal(1)
@@ -65,7 +65,7 @@ describe('Event bus', () => {
       expect(OBJ.count).to.equal(0)
     })
 
-    it('the subscriber can get to event for array', () => {
+    it('get event for array', () => {
       SUB.addListener('update', () => {})
       SUB.addListener('update2', () => {})
       const array = SUB.getListener()
@@ -83,7 +83,7 @@ describe('Event bus', () => {
       SUB = OBJ.createSubscriber()
     })
 
-    it('the Observer can dispatch other subsribers and their can accpet callback', (done) => {
+    it('dispatch callback', (done) => {
       SUB.addListener('update', () => {
         expect('ok').to.be.ok
         done()
@@ -91,7 +91,7 @@ describe('Event bus', () => {
       OBJ.dispatch('update')
     })
 
-    it('dispatch other subsribers, can send params', (done) => {
+    it('transfer params', (done) => {
       SUB.addListener('update', (p1, p2) => {
         expect(p1).to.equal(1)
         expect(p2).to.equal(2)
@@ -100,7 +100,7 @@ describe('Event bus', () => {
       OBJ.dispatch('update', 1, 2)
     })
 
-    it('the subsribers can remove the subscribe to event', (done) => {
+    it('remove handle', (done) => {
       let i = 0
       SUB.addListener('update', () => {
         if (i >= 2) return
