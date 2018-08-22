@@ -22,15 +22,42 @@ const Observer = function() {
   this.count = 0
 }
 
+/**
+ * 当前的订阅者，添加订阅事件
+ * 
+ * @param {string} type 类型
+ * @param {Function} fn 回调函数
+ */
 const _addListener = function(type, fn) {
-  this.listeners.push({
-    key: type,
-    func: fn
+  // 判断有没有重复的，有就覆盖
+  let index = 0
+  const isSame = this.listeners.some((v, i) => {
+    const isSameType = v.type === type
+    if (isSameType) {
+      index = i
+    }
+    return isSameType
   })
+  if (isSame) {
+    this.listeners[index] = {
+      type,
+      func: fn
+    }
+  } else {
+    this.listeners.push({
+      type,
+      func: fn
+    })
+  }
 }
 
+/**
+ * 移除当前订阅者的订阅事件
+ * 
+ * @param {string} type 
+ */
 const _removeListener = function(type) {
-  this.listeners = this.listeners.filter(v => v.key !== type)
+  this.listeners = this.listeners.filter(v => v.type !== type)
 }
 
 const _getListener = function() {
@@ -72,10 +99,13 @@ Observer.prototype.createSubscriber = function() {
  */
 Observer.prototype.$emit = function(type, ...args) {
   this.subscribers.forEach(v => {
-    const find = v.listeners.find(v => v.key === type)
-    if (find) {
-      find.func(...args)
-    }
+    v.listeners.some(v => {
+      if (v.type === type) {
+        v.func(...args)
+        return true
+      }
+      return false
+    })
   })
 }
 

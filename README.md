@@ -72,13 +72,13 @@ const observer = new eventBus()
 
 `observer` 的方法
 
-|        方法         |      说明      |      参数      |                            返回值                            |
-| :-----------------: | :------------: | :------------: | :----------------------------------------------------------: |
-|  createSubscriber   |   创建订阅者   |       无       |                    {Object}，返回订阅对象                    |
-|    getSubscriber    |   获取订阅者   |   {?number}    | {Object \| Array.<object>}，传 number，返回对象，传空返回全部 |
-|  removeSubscriber   |   移除订阅者   |    {number}    |                {boolean}，返回 true，代表成功                |
-| removeAllSubscriber | 移除全部订阅者 |       无       |                              无                              |
-|      dispatch       |    派发事件    | {string}, {…*} |          第一个参数是要触发的事件，后面可带任意参数          |
+|        方法         |      说明      |          参数          |                            返回值                            |
+| :-----------------: | :------------: | :--------------------: | :----------------------------------------------------------: |
+|  createSubscriber   |   创建订阅者   |           无           |                    {Object}，返回订阅对象                    |
+|    getSubscriber    |   获取订阅者   |    {id \| ?number}     | {Object \| Array.<object>}，传 sub.id，返回对象，传空返回全部 |
+|  removeSubscriber   |   移除订阅者   |     {id \| number}     |          {boolean}，传 sub.id，返回 true，代表成功           |
+| removeAllSubscriber | 移除全部订阅者 |           无           |                              无                              |
+|      dispatch       |    派发事件    | {type \| string}, {…*} |          第一个参数是要触发的事件，后面可带任意参数          |
 
 ```javascript
 const sub = observer.createSubsriber()
@@ -93,9 +93,14 @@ const sub = observer.createSubsriber()
 
 `subscriber` 的方法
 
-|      方法      |      说明      |         参数         |     返回值     |
-| :------------: | :------------: | :------------------: | :------------: |
-|  addListener   |    添加事件    | {string}, {Function} |       无       |
-| removeListener |    移除事件    |       {string}       |       无       |
-|  getListener   | 获取订阅的事件 |          无          | {Array.object} |
+|      方法      |      说明      |                   参数                   |     返回值     |
+| :------------: | :------------: | :--------------------------------------: | :------------: |
+|  addListener   |    添加事件    | {type \| string}, {callback \| Function} |       无       |
+| removeListener |    移除事件    |             {type \| string}             |       无       |
+|  getListener   | 获取订阅的事件 |                    无                    | {Array.object} |
 
+
+
+## 注意点
+
+* 重复添加的订阅事件，会覆盖

@@ -70,8 +70,23 @@ describe('Event bus', () => {
       SUB.addListener('update2', () => {})
       const array = SUB.getListener()
       expect(array).to.be.an('array')
-      expect(array.find(v => v.key === 'update')).to.exist
-      expect(array.find(v => v.key === 'update2')).to.exist
+      expect(array.find(v => v.type === 'update')).to.exist
+      expect(array.find(v => v.type === 'update2')).to.exist
+    })
+
+    it('covered function', (done) => {
+      let value = 0
+      SUB.addListener('update', () => {
+        value = 1
+        expect(value).to.equal(1)
+        done()
+      })
+      SUB.addListener('update', () => {
+        value = 2
+        expect(value).to.equal(2)
+        done()
+      })
+      OBJ.dispatch('update')
     })
   })
 
