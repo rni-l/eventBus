@@ -6,7 +6,6 @@
 /**
  * Event bus
  * 拥有派发、订阅功能
- * 
  * @class
  */
 const Observer = function() {
@@ -104,7 +103,6 @@ Observer.prototype.$emit = function(type, ...args) {
         v.func(...args)
         return true
       }
-      return false
     })
   })
 }

@@ -129,5 +129,14 @@ describe('Event bus', () => {
         done()
       }, 1000)
     })
+
+    it('no match type', (done) => {
+      SUB.addListener('update2', () => {
+        done(false)
+      })
+      setTimeout(() => {
+        done()
+      }, 16)
+    })
   })
 })
