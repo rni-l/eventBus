@@ -4,7 +4,7 @@ const rm = require('rimraf')
 const chalk = require('chalk')
 const webpack = require('webpack')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const pkg = require('./package.json')
 const rootPath = path.resolve(__dirname)
@@ -19,25 +19,29 @@ const defaultPlugin = [
   })
 ]
 
-const entry = isDevelopment ? {
-  app: path.resolve(rootPath, 'src', 'index.js')
-} : {
-  app: path.resolve(rootPath, 'src', `${pluginName}.js`)
-}
+const entry = isDevelopment
+  ? {
+    app: path.resolve(rootPath, 'src', 'index.ts')
+  }
+  : {
+    app: path.resolve(rootPath, 'src', `${pluginName}.ts`)
+  }
 
-const output = isDevelopment ? {
-  filename: 'index.js',
-  path: path.resolve(rootPath, 'dist')
-} : {
-  filename: `${pluginName}.js`,
-  path: path.resolve(rootPath, 'dist'),
-  library: {
-    root: pluginName,
-    amd: pluginName,
-    commonjs: pluginName
-  },
-  libraryTarget: 'umd'
-}
+const output = isDevelopment
+  ? {
+    filename: 'index.js',
+    path: path.resolve(rootPath, 'dist')
+  }
+  : {
+    filename: `${pluginName}.js`,
+    path: path.resolve(rootPath, 'dist'),
+    library: {
+      root: pluginName,
+      amd: pluginName,
+      commonjs: pluginName
+    },
+    libraryTarget: 'umd'
+  }
 
 const config = {
   mode: isDevelopment ? 'development' : 'production',
@@ -52,8 +56,17 @@ const config = {
 
   output,
 
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js']
+  },
+
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
       {
         test: /\.js$/,
         loader: 'eslint-loader',
@@ -69,28 +82,28 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: isDevelopment ? [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          { loader: 'sass-loader' }
-        ] : ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
+        use: isDevelopment
+          ? [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'sass-loader' }]
+          : ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: ['css-loader', 'sass-loader']
+          })
       }
     ]
   },
 
-  plugins: [].concat(isDevelopment ?
-    defaultPlugin :
-    [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          ie8: true
-        }
-      }),
-      new ExtractTextPlugin("styles.css")
-    ])
+  plugins: [].concat(
+    isDevelopment
+      ? defaultPlugin
+      : [
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            ie8: true
+          }
+        }),
+        new ExtractTextPlugin('styles.css')
+      ]
+  )
 }
 
 module.exports = config

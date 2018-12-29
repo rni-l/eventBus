@@ -56,7 +56,9 @@
     "webpack-dev-server": "^3.1.1"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "ts-loader": "^5.3.2",
+    "typescript": "^3.2.2"
   },
   "pluginName": "eventBus"
 }
