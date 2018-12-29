@@ -1,7 +1,6 @@
 import eventBus from './../../src/eventBus'
 
 describe('Event bus', () => {
-
   describe('observer', () => {
     let OBJ = {}
     let SUB = {}
@@ -48,12 +47,11 @@ describe('Event bus', () => {
       expect(SUB.id).to.not.equal(sub2.id)
     })
 
-    it("the id of the sub cannot be deleted", () => {
+    it('the id of the sub cannot be deleted', () => {
       expect(SUB.id).to.exist
       try {
         delete SUB.id
-      } catch (error) {
-      }
+      } catch (error) {}
       expect(SUB.id).to.exist
     })
 
@@ -74,7 +72,7 @@ describe('Event bus', () => {
       expect(array.find(v => v.type === 'update2')).to.exist
     })
 
-    it('covered function', (done) => {
+    it('covered function', done => {
       let value = 0
       SUB.addListener('update', () => {
         value = 1
@@ -98,7 +96,7 @@ describe('Event bus', () => {
       SUB = OBJ.createSubscriber()
     })
 
-    it('dispatch callback', (done) => {
+    it('dispatch callback', done => {
       SUB.addListener('update', () => {
         expect('ok').to.be.ok
         done()
@@ -106,7 +104,7 @@ describe('Event bus', () => {
       OBJ.dispatch('update')
     })
 
-    it('transfer params', (done) => {
+    it('transfer params', done => {
       SUB.addListener('update', (p1, p2) => {
         expect(p1).to.equal(1)
         expect(p2).to.equal(2)
@@ -115,7 +113,7 @@ describe('Event bus', () => {
       OBJ.dispatch('update', 1, 2)
     })
 
-    it('remove handle', (done) => {
+    it('remove listener', done => {
       let i = 0
       SUB.addListener('update', () => {
         if (i >= 2) return
@@ -130,7 +128,27 @@ describe('Event bus', () => {
       }, 1000)
     })
 
-    it('no match type', (done) => {
+    it('remove all listeners', done => {
+      let i = 0
+      SUB.addListener('update', () => {
+        if (i > 3) return
+        i += 1
+      })
+      SUB.addListener('update2', () => {
+        if (i > 3) return
+        i += 1
+        SUB.removeAllListener()
+        OBJ.dispatch('update2')
+      })
+      OBJ.dispatch('update')
+      OBJ.dispatch('update2')
+      setTimeout(() => {
+        expect(i).to.equal(2)
+        done()
+      }, 1000)
+    })
+
+    it('no match type', done => {
       SUB.addListener('update2', () => {
         done(false)
       })

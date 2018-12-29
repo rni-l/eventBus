@@ -6,9 +6,10 @@ declare namespace EasyEventbus {
 
   interface subscriber {
     addListener: Function
-    removeListener: Function,
-    getListener: Function,
-    listeners: listener[],
+    removeListener: Function
+    removeAllListener: Function
+    getListener: Function
+    listeners: listener[]
     id?: number
   }
 }

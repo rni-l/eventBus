@@ -14,7 +14,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      './index.js': ['webpack', 'sourcemap']
+      './index.js': ['webpack', 'sourcemap'],
+      './index.ts': ['coverage']
     },
 
     plugins: [
@@ -25,14 +26,21 @@ module.exports = function(config) {
       'karma-spec-reporter',
       'karma-webpack',
       'karma-sourcemap-loader',
-      'karma-coverage-istanbul-reporter',
-      'karma-coverage'
+      // 'karma-coverage-istanbul-reporter',
+      'karma-coverage',
+      'karma-remap-coverage'
     ],
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['spec', 'coverage-istanbul'],
+    reporters: ['spec', 'progress', 'coverage', 'remap-coverage'],
+
+    remapCoverageReporter: {
+      // 'text-summary': null,
+      html: './coverage/html',
+      cobertura: './coverage/cobertura.xml'
+    },
 
     // web server port
     port: 9876,

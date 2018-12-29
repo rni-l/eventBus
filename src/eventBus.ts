@@ -5,11 +5,11 @@
 
 /**
  * 当前的订阅者，添加订阅事件
- * 
+ *
  * @param {string} type 类型
  * @param {Function} fn 回调函数
  */
-const _addListener = function (type: string, fn: Function) {
+const _addListener = function(type: string, fn: Function) {
   // 判断有没有重复的，有就覆盖
   let index = 0
   const isSame = this.listeners.some((v: EasyEventbus.listener, i: number) => {
@@ -34,17 +34,26 @@ const _addListener = function (type: string, fn: Function) {
 
 /**
  * 移除当前订阅者的订阅事件
- * 
- * @param {string} type 
+ *
+ * @param {string} type
  */
-const _removeListener = function (type: string) {
+const _removeListener = function(type: string) {
   this.listeners = this.listeners.filter((v: EasyEventbus.listener) => v.type !== type)
+}
+
+/**
+ * 移除当前订阅者的订阅事件
+ *
+ * @param {string} type
+ */
+const _removeAllListener = function (type: string) {
+  this.listeners = []
 }
 
 /**
  * 获取当前订阅者的所有订阅事件
  */
-const _getListener = function () {
+const _getListener = function() {
   return this.listeners
 }
 
@@ -72,11 +81,11 @@ class Observer {
 
   /**
    * 创建订阅者
-   * 
+   *
    * @public
    * @return {Object} 当前添加的订阅者
    */
-  createSubscriber = function () {
+  createSubscriber = function() {
     this.count += 1
     // 派发事件
     this.$emit('create')
@@ -85,6 +94,7 @@ class Observer {
     const obj: EasyEventbus.subscriber = {
       addListener: _addListener,
       removeListener: _removeListener,
+      removeAllListener: _removeAllListener,
       getListener: _getListener,
       listeners: []
     }
@@ -98,12 +108,12 @@ class Observer {
 
   /**
    * 触发所有订阅者，指定的事件
-   * 
+   *
    * @private
    * @param {String} type 要派发事件的类型
    * @param {*} args 其余自定义参数
    */
-  $emit = function (type: string, ...args: []) {
+  $emit = function(type: string, ...args: []) {
     this.subscribers.forEach((v: EasyEventbus.subscriber) => {
       v.listeners.some((v: EasyEventbus.listener) => {
         if (v.type === type) {
@@ -116,22 +126,22 @@ class Observer {
 
   /**
    * 触发所有订阅者，指定的事件
-   * 
+   *
    * @public
    * @param {String} type 要派发事件的类型
    * @param {*} args 其余自定义参数
    */
-  dispatch = function (type: string, ...args: []) {
+  dispatch = function(type: string, ...args: []) {
     this.$emit(type, ...args)
   }
 
   /**
    * 移除某个订阅者
-   * 
+   *
    * @public
    * @param {Number} id 订阅者的 id
    */
-  removeSubscriber = function (id: number) {
+  removeSubscriber = function(id: number) {
     return this.subscribers.some((v: EasyEventbus.subscriber, i: number) => {
       if (v.id === id) {
         this.subscribers[i] = null
@@ -145,22 +155,22 @@ class Observer {
 
   /**
    * 移除所有订阅者
-   * 
+   *
    * @public
    */
-  removeAllSubscriber = function () {
+  removeAllSubscriber = function() {
     this.count = 0
     this.subscribers = []
   }
 
   /**
    * 获取某个订阅者
-   * 
+   *
    * @public
    * @param {Number} id 订阅者的 id
    * @return {Object}
    */
-  getSubscriber = function (id: number) {
+  getSubscriber = function(id: number) {
     if (id) {
       return this.subscribers.filter((v: EasyEventbus.subscriber) => v.id === id)[0]
     }
