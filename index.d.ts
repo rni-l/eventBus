@@ -1,10 +1,12 @@
-declare namespace EasyEventbus {
-  interface listener {
+// import EasyEventbusObj from './src/eventBus'
+
+declare namespace eventbus {
+  export interface listener {
     type: string
     func: Function
   }
 
-  interface subscriber {
+  export interface subscriber {
     addListener: Function
     removeListener: Function
     removeAllListener: Function
@@ -12,4 +14,16 @@ declare namespace EasyEventbus {
     listeners: listener[]
     id?: number
   }
+}
+
+declare class EasyEventbus {
+  removeAllSubscriber(): void
+  removeSubscriber(id: number): any
+  dispatch(type: string, ...args: []): any
+  $emit(type: string, ...args: []): any
+  createSubscriber(): any
+}
+
+declare module 'easy-eventbus' {
+  export = EasyEventbus
 }

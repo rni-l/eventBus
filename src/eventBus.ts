@@ -12,7 +12,7 @@
 const _addListener = function(type: string, fn: Function) {
   // 判断有没有重复的，有就覆盖
   let index = 0
-  const isSame = this.listeners.some((v: EasyEventbus.listener, i: number) => {
+  const isSame = this.listeners.some((v: eventbus.listener, i: number) => {
     const isSameType = v.type === type
     if (isSameType) {
       index = i
@@ -38,7 +38,7 @@ const _addListener = function(type: string, fn: Function) {
  * @param {string} type
  */
 const _removeListener = function(type: string) {
-  this.listeners = this.listeners.filter((v: EasyEventbus.listener) => v.type !== type)
+  this.listeners = this.listeners.filter((v: eventbus.listener) => v.type !== type)
 }
 
 /**
@@ -46,7 +46,7 @@ const _removeListener = function(type: string) {
  *
  * @param {string} type
  */
-const _removeAllListener = function (type: string) {
+const _removeAllListener = function(type: string) {
   this.listeners = []
 }
 
@@ -62,8 +62,8 @@ const _getListener = function() {
  * 拥有派发、订阅功能
  * @class
  */
-class Observer {
-  public subscribers: EasyEventbus.subscriber[]
+class EasyEventbus {
+  public subscribers: eventbus.subscriber[]
   public id: number
   public count: number
   /**
@@ -91,7 +91,7 @@ class Observer {
     this.$emit('create')
     this.id += 1
     const id = this.id
-    const obj: EasyEventbus.subscriber = {
+    const obj: eventbus.subscriber = {
       addListener: _addListener,
       removeListener: _removeListener,
       removeAllListener: _removeAllListener,
@@ -114,8 +114,8 @@ class Observer {
    * @param {*} args 其余自定义参数
    */
   $emit = function(type: string, ...args: []) {
-    this.subscribers.forEach((v: EasyEventbus.subscriber) => {
-      v.listeners.some((v: EasyEventbus.listener) => {
+    this.subscribers.forEach((v: eventbus.subscriber) => {
+      v.listeners.some((v: eventbus.listener) => {
         if (v.type === type) {
           v.func(...args)
           return true
@@ -142,7 +142,7 @@ class Observer {
    * @param {Number} id 订阅者的 id
    */
   removeSubscriber = function(id: number) {
-    return this.subscribers.some((v: EasyEventbus.subscriber, i: number) => {
+    return this.subscribers.some((v: eventbus.subscriber, i: number) => {
       if (v.id === id) {
         this.subscribers[i] = null
         this.subscribers.splice(i, 1)
@@ -172,10 +172,10 @@ class Observer {
    */
   getSubscriber = function(id: number) {
     if (id) {
-      return this.subscribers.filter((v: EasyEventbus.subscriber) => v.id === id)[0]
+      return this.subscribers.filter((v: eventbus.subscriber) => v.id === id)[0]
     }
     return this.subscribers
   }
 }
 
-export default Observer
+export default EasyEventbus
