@@ -96,7 +96,8 @@ class EasyEventbus {
       removeListener: _removeListener,
       removeAllListener: _removeAllListener,
       getListener: _getListener,
-      listeners: []
+      listeners: [],
+      id: -1
     }
     Object.defineProperty(obj, 'id', {
       value: id,
@@ -113,7 +114,7 @@ class EasyEventbus {
    * @param {String} type 要派发事件的类型
    * @param {*} args 其余自定义参数
    */
-  $emit = function(type: string, ...args: []) {
+  $emit = function(type: string, ...args: any[]) {
     this.subscribers.forEach((v: eventbus.subscriber) => {
       v.listeners.some((v: eventbus.listener) => {
         if (v.type === type) {
@@ -131,7 +132,7 @@ class EasyEventbus {
    * @param {String} type 要派发事件的类型
    * @param {*} args 其余自定义参数
    */
-  dispatch = function(type: string, ...args: []) {
+  dispatch = function(type: string, ...args: any[]) {
     this.$emit(type, ...args)
   }
 

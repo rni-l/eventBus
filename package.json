@@ -1,6 +1,6 @@
 {
   "name": "easy-eventbus",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "this is a library for eventbus",
   "main": "index.js",
   "types": "index.d.ts",
