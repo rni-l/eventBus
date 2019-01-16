@@ -3,13 +3,29 @@
  * @author Rni-l
  */
 
+export declare namespace eventbus {
+  export interface listener {
+    type: string
+    func: Function
+  }
+
+  export interface subscriber {
+    addListener: Function
+    removeListener: Function
+    removeAllListener: Function
+    getListener: Function
+    listeners: listener[]
+    id: number
+  }
+}
+
 /**
  * 当前的订阅者，添加订阅事件
  *
  * @param {string} type 类型
  * @param {Function} fn 回调函数
  */
-const _addListener = function(type: string, fn: Function) {
+const _addListener = function(this: eventbus.subscriber, type: string, fn: Function) {
   // 判断有没有重复的，有就覆盖
   let index = 0
   const isSame = this.listeners.some((v: eventbus.listener, i: number) => {
@@ -37,7 +53,7 @@ const _addListener = function(type: string, fn: Function) {
  *
  * @param {string} type
  */
-const _removeListener = function(type: string) {
+const _removeListener = function(this: eventbus.subscriber, type: string) {
   this.listeners = this.listeners.filter((v: eventbus.listener) => v.type !== type)
 }
 
@@ -46,14 +62,14 @@ const _removeListener = function(type: string) {
  *
  * @param {string} type
  */
-const _removeAllListener = function(type: string) {
+const _removeAllListener = function(this: eventbus.subscriber) {
   this.listeners = []
 }
 
 /**
  * 获取当前订阅者的所有订阅事件
  */
-const _getListener = function() {
+const _getListener = function(this: eventbus.subscriber) {
   return this.listeners
 }
 
@@ -85,7 +101,7 @@ class EasyEventbus {
    * @public
    * @return {Object} 当前添加的订阅者
    */
-  createSubscriber = function() {
+  createSubscriber = function(this: any) {
     this.count += 1
     // 派发事件
     this.$emit('create')
@@ -114,13 +130,14 @@ class EasyEventbus {
    * @param {String} type 要派发事件的类型
    * @param {*} args 其余自定义参数
    */
-  $emit = function(type: string, ...args: any[]) {
+  $emit = function (this: any, type: string, ...args: any[]) {
     this.subscribers.forEach((v: eventbus.subscriber) => {
       v.listeners.some((v: eventbus.listener) => {
         if (v.type === type) {
           v.func(...args)
           return true
         }
+        return false
       })
     })
   }
@@ -132,7 +149,7 @@ class EasyEventbus {
    * @param {String} type 要派发事件的类型
    * @param {*} args 其余自定义参数
    */
-  dispatch = function(type: string, ...args: any[]) {
+  dispatch = function (this: any, type: string, ...args: any[]) {
     this.$emit(type, ...args)
   }
 
@@ -142,7 +159,7 @@ class EasyEventbus {
    * @public
    * @param {Number} id 订阅者的 id
    */
-  removeSubscriber = function(id: number) {
+  removeSubscriber = function (this: any, id: number) {
     return this.subscribers.some((v: eventbus.subscriber, i: number) => {
       if (v.id === id) {
         this.subscribers[i] = null
@@ -159,7 +176,7 @@ class EasyEventbus {
    *
    * @public
    */
-  removeAllSubscriber = function() {
+  removeAllSubscriber = function (this: any) {
     this.count = 0
     this.subscribers = []
   }
@@ -171,7 +188,7 @@ class EasyEventbus {
    * @param {Number} id 订阅者的 id
    * @return {Object}
    */
-  getSubscriber = function(id: number) {
+  getSubscriber = function (this: any, id: number) {
     if (id) {
       return this.subscribers.filter((v: eventbus.subscriber) => v.id === id)[0]
     }

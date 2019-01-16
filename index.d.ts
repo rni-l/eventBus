@@ -1,3 +1,6 @@
+// import { Subscriber } from './types/eventbus'
+import { eventbus } from './src/eventBus'
+
 export default class EasyEventbus {
   removeAllSubscriber(): void
   removeSubscriber(id: number): any
@@ -6,4 +9,4 @@ export default class EasyEventbus {
   createSubscriber(): any
 }
 
-export interface EasyEventbusInstance extends eventbus.subscriber { }
+export interface EasyEventbusInstance extends eventbus.subscriber {}
