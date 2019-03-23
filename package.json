@@ -60,8 +60,14 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "cz-conventional-changelog": "^2.1.0",
     "ts-loader": "^5.3.2",
     "typescript": "^3.1.2"
   },
-  "pluginName": "eventBus"
+  "pluginName": "eventBus",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
