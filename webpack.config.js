@@ -24,7 +24,7 @@ const entry = isDevelopment
     app: path.resolve(rootPath, 'src', 'index.ts')
   }
   : {
-    app: path.resolve(rootPath, 'src', `${pluginName}.ts`)
+    app: path.resolve(rootPath, 'src', `index.ts`)
   }
 
 const output = isDevelopment
@@ -59,6 +59,8 @@ const config = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
   },
+
+  devtool: false,
 
   module: {
     rules: [

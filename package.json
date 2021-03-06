@@ -1,9 +1,9 @@
 {
   "name": "easy-eventbus",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "description": "this is a library for eventbus",
   "main": "index.js",
-  "types": "index.d.ts",
+  "types": "types/index.d.ts",
   "scripts": {
     "unit": "cross-env NODE_ENV=test karma start test/karma.conf.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot --port 9923",
@@ -55,7 +55,7 @@
     "style-loader": "^0.20.3",
     "uglifyjs-webpack-plugin": "^1.2.4",
     "webpack": "^4.19.0",
-    "webpack-cli": "^2.0.13",
+    "webpack-cli": "^3.1.1",
     "webpack-dev-server": "^3.1.1"
   },
   "dependencies": {

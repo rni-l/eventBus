@@ -47,14 +47,6 @@ describe('Event bus', () => {
       expect(SUB.id).to.not.equal(sub2.id)
     })
 
-    it('the id of the sub cannot be deleted', () => {
-      expect(SUB.id).to.exist
-      try {
-        delete SUB.id
-      } catch (error) {}
-      expect(SUB.id).to.exist
-    })
-
     it('remove subscriber by id', () => {
       expect(OBJ.count).to.equal(1)
       OBJ.removeSubscriber('sdf')
