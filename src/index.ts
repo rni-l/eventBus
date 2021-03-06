@@ -116,9 +116,9 @@ class EasySubscriber {
  * @class
  */
 class EasyEventbus {
-  public subscribers: EasySubscriber[]
-  public id: number
-  public count: number
+  subscribers: EasySubscriber[] = []
+  id: number
+  count: number
   /**
    * 属性描述
    *
@@ -220,5 +220,8 @@ class EasyEventbus {
     return this.subscribers
   }
 }
-
+export {
+  EasyListener,
+  EasySubscriber
+}
 export default EasyEventbus

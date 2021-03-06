@@ -114,4 +114,5 @@ declare class EasyEventbus {
      */
     getSubscriber(id: number): EasySubscriber | EasySubscriber[];
 }
+export { EasyListener, EasySubscriber };
 export default EasyEventbus;
