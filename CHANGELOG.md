@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/rni-l/eventBus/compare/v0.3.0...v0.3.1) (2021-03-06)
+
+
+### Bug Fixes
+
+* 修复类型导出问题 ([b61a67e](https://github.com/rni-l/eventBus/commit/b61a67e3e6888e4a200e9b4ddff1de7c9b0b5866))
+
 ## [0.3.0](https://github.com/rni-l/eventBus/compare/v0.2.9...v0.3.0) (2021-03-06)
 
 
