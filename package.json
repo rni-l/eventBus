@@ -7,7 +7,8 @@
   "scripts": {
     "unit": "cross-env NODE_ENV=test karma start test/karma.conf.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot --port 9923",
-    "build": "cross-env NODE_ENV=production webpack"
+    "build": "cross-env NODE_ENV=production webpack",
+    "release": "standard-version"
   },
   "keywords": [
     "eventbus",
@@ -52,6 +53,7 @@
     "node-sass": "^4.8.3",
     "ora": "^3.0.0",
     "sass-loader": "^6.0.7",
+    "standard-version": "^9.1.1",
     "style-loader": "^0.20.3",
     "uglifyjs-webpack-plugin": "^1.2.4",
     "webpack": "^4.19.0",
