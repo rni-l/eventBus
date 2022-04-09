@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/rni-l/eventBus/compare/v0.3.2...v0.4.0) (2022-04-09)
+
+
+### Features
+
+* add on and once fn ([1915007](https://github.com/rni-l/eventBus/commit/1915007cdcbe07c7cf280f326a802911a8bb2ec1))
+
 ### [0.3.2](https://github.com/rni-l/eventBus/compare/v0.3.1...v0.3.2) (2021-12-16)
 
 ### [0.3.1](https://github.com/rni-l/eventBus/compare/v0.3.0...v0.3.1) (2021-03-06)
