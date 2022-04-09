@@ -85,6 +85,13 @@ describe('Event bus', () => {
       })
       OBJ.dispatch('update')
     })
+
+    it('once', done => {
+      SUB.addListener('update', () => {
+        done()
+      })
+      OBJ.dispatch('update')
+    })
   })
 
   describe('dispatch', () => {
@@ -93,6 +100,23 @@ describe('Event bus', () => {
         expect('ok').toBe('ok')
         done()
       })
+      OBJ.dispatch('update')
+    })
+
+    it('use on fn, dispatch callback', done => {
+      SUB.on('update', () => {
+        expect('ok').toBe('ok')
+        done()
+      })
+      OBJ.dispatch('update')
+    })
+
+    it('once', done => {
+      SUB.once('update', () => {
+        expect(SUB.getListener().length).toBe(0)
+        done()
+      })
+      expect(SUB.getListener().length).toBe(1)
       OBJ.dispatch('update')
     })
 

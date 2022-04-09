@@ -20,6 +20,18 @@ class EasySubscriber {
       writable: false
     })
   }
+
+  on(type: string, fn: EmptyFn) {
+    this.addListener(type, fn)
+  }
+
+  once(type: string, fn: EmptyFn) {
+    this.addListener(type, () => {
+      this.removeListener(type)
+      fn()
+    })
+  }
+
   /**
    * 当前的订阅者，添加订阅事件
    *
