@@ -3,7 +3,6 @@
     "outDir": "./types/",
     "noImplicitAny": true,
     "sourceMap": false,
-    "module": "es6",
     "target": "es5",
     "jsx": "react",
     "declaration": true

@@ -3,9 +3,10 @@
  * @author Rni-l
  * @version v0.3.0
  */
+declare type EmptyFn = (...args: unknown[]) => void;
 declare type EasyListener = {
     type: string;
-    func: Function;
+    func: EmptyFn;
 };
 declare class EasySubscriber {
     listeners: EasyListener[];
@@ -17,7 +18,7 @@ declare class EasySubscriber {
      * @param {string} type 类型
      * @param {Function} fn 回调函数
      */
-    addListener(type: string, fn: Function): void;
+    addListener(type: string, fn: EmptyFn): void;
     /**
      * 当前的订阅者，添加多个订阅事件
      *
@@ -27,7 +28,7 @@ declare class EasySubscriber {
      */
     addListeners(objs: {
         type: string;
-        fn: Function;
+        fn: EmptyFn;
     }[]): void;
     /**
      * 移除当前订阅者的订阅事件
@@ -83,7 +84,7 @@ declare class EasyEventbus {
      * @param {String} type 要派发事件的类型
      * @param {*} args 其余自定义参数
      */
-    $emit(type: string, ...args: any[]): void;
+    $emit(type: string, ...args: unknown[]): void;
     /**
      * 触发所有订阅者，指定的事件
      *
@@ -91,7 +92,7 @@ declare class EasyEventbus {
      * @param {String} type 要派发事件的类型
      * @param {*} args 其余自定义参数
      */
-    dispatch(type: string, ...args: any[]): void;
+    dispatch(type: string, ...args: unknown[]): void;
     /**
      * 移除某个订阅者
      *

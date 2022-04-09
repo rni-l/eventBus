@@ -1,2 +1,6 @@
 /node_modules
 
+dist
+
+.Dt_store
+coverage

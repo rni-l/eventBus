@@ -4,9 +4,11 @@
  * @version v0.3.0
  */
 
+type EmptyFn = (...args: unknown[]) => void
+
 type EasyListener = {
   type: string;
-  func: Function;
+  func: EmptyFn;
 }
 
 class EasySubscriber {
@@ -24,7 +26,7 @@ class EasySubscriber {
    * @param {string} type 类型
    * @param {Function} fn 回调函数
    */
-  addListener(type: string, fn: Function) {
+  addListener(type: string, fn: EmptyFn) {
     // 判断有没有重复的，有就覆盖
     let index = 0
     const isSame = this.listeners.some((v, i: number) => {
@@ -56,7 +58,7 @@ class EasySubscriber {
    * @property {Function} fn 回调函数
    */
   addListeners(objs: {
-    type: string, fn: Function
+    type: string, fn: EmptyFn
   }[]) {
     // 判断有没有重复的，有就覆盖
     const types = this.listeners.map(v => v.type)
@@ -155,7 +157,7 @@ class EasyEventbus {
    * @param {String} type 要派发事件的类型
    * @param {*} args 其余自定义参数
    */
-  $emit(type: string, ...args: any[]) {
+  $emit(type: string, ...args: unknown[]) {
     this.subscribers.forEach((v) => {
       v.listeners.some((listener) => {
         if (listener.type === type) {
@@ -174,7 +176,7 @@ class EasyEventbus {
    * @param {String} type 要派发事件的类型
    * @param {*} args 其余自定义参数
    */
-  dispatch(type: string, ...args: any[]) {
+  dispatch(type: string, ...args: unknown[]) {
     this.$emit(type, ...args)
   }
 
@@ -213,7 +215,7 @@ class EasyEventbus {
    * @param {Number} id 订阅者的 id
    * @return {Object}
    */
-  getSubscriber(id: number) {
+  getSubscriber(id?: number) {
     if (id) {
       return this.subscribers.filter((v) => v.id === id)[0]
     }
