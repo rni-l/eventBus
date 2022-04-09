@@ -4,7 +4,7 @@
  * @version v0.3.0
  */
 
-type EmptyFn = (...args: unknown[]) => void
+type EmptyFn = (...args: any) => unknown
 
 type EasyListener = {
   type: string;

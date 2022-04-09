@@ -12,6 +12,8 @@ declare class EasySubscriber {
     listeners: EasyListener[];
     id: number;
     constructor(id: number);
+    on(type: string, fn: EmptyFn): void;
+    once(type: string, fn: EmptyFn): void;
     /**
      * 当前的订阅者，添加订阅事件
      *
@@ -113,7 +115,7 @@ declare class EasyEventbus {
      * @param {Number} id 订阅者的 id
      * @return {Object}
      */
-    getSubscriber(id: number): EasySubscriber | EasySubscriber[];
+    getSubscriber(id?: number): EasySubscriber | EasySubscriber[];
 }
 export { EasyListener, EasySubscriber };
 export default EasyEventbus;
