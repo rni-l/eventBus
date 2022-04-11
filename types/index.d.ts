@@ -3,7 +3,7 @@
  * @author Rni-l
  * @version v0.3.0
  */
-declare type EmptyFn = (...args: unknown[]) => void;
+declare type EmptyFn = (...args: any) => any;
 declare type EasyListener = {
     type: string;
     func: EmptyFn;
