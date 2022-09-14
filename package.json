@@ -2,13 +2,16 @@
   "name": "easy-eventbus",
   "version": "0.4.2",
   "description": "this is a library for eventbus",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "type": "module",
+  "module": "types/index.js",
   "types": "types/index.d.ts",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot --port 9923",
     "build": "cross-env NODE_ENV=production webpack",
     "release": "standard-version",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "tsc": "tsc"
   },
   "keywords": [
     "eventbus",

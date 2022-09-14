@@ -4,12 +4,11 @@
     "noImplicitAny": true,
     "sourceMap": false,
     "target": "es5",
-    "jsx": "react",
-    "declaration": true
+    "declaration": true,
+    "module": "ESNext",
+    "skipLibCheck": true
   },
   "include": [
-    "./src/**/*",
-    "./types/*",
-    "./index.d.ts"
+    "./src/**/*"
   ]
 }
