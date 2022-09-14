@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.3](https://github.com/rni-l/eventBus/compare/v0.4.2...v0.4.3) (2022-09-14)
+
+
+### Features
+
+* add esm entry ([c1f3cfb](https://github.com/rni-l/eventBus/commit/c1f3cfbe1ead76a24322d463e725ffe9e3c7517e))
+
 ### [0.4.2](https://github.com/rni-l/eventBus/compare/v0.4.1...v0.4.2) (2022-04-11)
 
 
