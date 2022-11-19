@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.4](https://github.com/rni-l/eventBus/compare/v0.4.3...v0.4.4) (2022-11-19)
+
+
+### Bug Fixes
+
+* 添加不同的 export ([0674f96](https://github.com/rni-l/eventBus/commit/0674f96f2e35658017ed7b3d33c644b35bce501e))
+
 ### [0.4.3](https://github.com/rni-l/eventBus/compare/v0.4.2...v0.4.3) (2022-09-14)
 
 
