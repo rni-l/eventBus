@@ -236,6 +236,7 @@ class EasyEventbus {
 }
 export {
   EasyListener,
-  EasySubscriber
+  EasySubscriber,
+  EasyEventbus
 }
 export default EasyEventbus

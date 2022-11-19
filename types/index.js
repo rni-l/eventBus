@@ -233,5 +233,5 @@ var EasyEventbus = /** @class */ (function () {
     };
     return EasyEventbus;
 }());
-export { EasySubscriber };
+export { EasySubscriber, EasyEventbus };
 export default EasyEventbus;
