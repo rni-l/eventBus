@@ -239,4 +239,4 @@ export {
   EasySubscriber,
   EasyEventbus
 }
-export default EasyEventbus
+

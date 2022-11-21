@@ -13,6 +13,13 @@
     "test": "jest --watch",
     "tsc": "tsc"
   },
+  "exports": {
+    ".": {
+      "import": "types/index.js",
+      "require": "dist/index.js",
+      "types": "types/index.d.ts"
+    }
+  },
   "keywords": [
     "eventbus",
     "easy-eventbus"
