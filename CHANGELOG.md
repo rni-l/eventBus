@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.7](https://github.com/rni-l/eventBus/compare/v0.4.6...v0.4.7) (2026-03-30)
+
+
+### Bug Fixes
+
+* handlebars security question ([429e57d](https://github.com/rni-l/eventBus/commit/429e57db314aa665d184a5cada5354ec71f5c2b8))
+
 ### [0.4.6](https://github.com/rni-l/eventBus/compare/v0.4.5...v0.4.6) (2022-11-22)
 
 
